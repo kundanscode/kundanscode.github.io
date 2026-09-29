@@ -1496,9 +1496,9 @@ View work
 <span class="project-year">— Personal · Concurrency</span>
 </div>
 <h3 class="project-title">Concurrent Batch Processing Engine</h3>
-<p class="project-desc">[Add your multithreading project here — e.g. a bulk-record processor using ExecutorService/CompletableFuture worker pools, or a custom rate-limited task scheduler. Swap this description and stack for the real one.]</p>
+<p class="project-desc">A bulk-record processor built to replace a slow sequential import job — a bounded worker pool on ExecutorService with CompletableFuture pipelines, backpressure via a blocking queue, and per-record retry/failure isolation so one bad row can't stall the batch.</p>
 <div class="project-stack">
-<span>Java</span><span>Concurrency</span><span>ExecutorService</span>
+<span>Java</span><span>Concurrency</span><span>ExecutorService</span><span>CompletableFuture</span>
 </div>
 </div>
 </div>
