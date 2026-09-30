@@ -1098,6 +1098,77 @@ font-family: var(--serif); font-size: 1.25rem; line-height: 1.25; margin-bottom:
 .blog-more { display: flex; justify-content: center; }
 @media (max-width: 900px) { .blog-grid { grid-template-columns: 1fr; } }
 
+
+/* ---------- Approach / meditate ---------- */
+.meditate-wrap {
+position: relative; display: flex; align-items: center; justify-content: center;
+min-height: 620px; margin: 1.5rem 0 0.5rem;
+}
+.meditate-aura {
+position: absolute; width: 200px; height: 200px; border-radius: 50%;
+border: 1px solid var(--accent); opacity: 0.22;
+animation: breatheAura 4.5s ease-in-out infinite;
+}
+.meditate-aura.a2 { width: 260px; height: 260px; animation-delay: 0.7s; opacity: 0.14; }
+@keyframes breatheAura { 0%,100% { transform: scale(1); opacity: 0.22; } 50% { transform: scale(1.1); opacity: 0.42; } }
+.meditate-fig { position: relative; width: 128px; height: 128px; z-index: 2; filter: url(#dBoil); }
+.meditate-fig svg { width: 100%; height: 100%; overflow: visible; }
+.meditate-third-eye { animation: chakraPulse 3s ease-in-out infinite; }
+@keyframes chakraPulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+.meditate-orbit { position: absolute; inset: 0; list-style: none; --radius: 300px; }
+.meditate-orbit li {
+position: absolute; top: 50%; left: 50%; margin: 0;
+transform: translate(-50%, -50%) rotate(calc(var(--i) * 60deg)) translate(var(--radius)) rotate(calc(var(--i) * -60deg));
+opacity: 0; z-index: 3;
+transition: opacity 0.7s ease calc(var(--i) * 0.12s);
+}
+.meditate-wrap.in .meditate-orbit li { opacity: 1; }
+.meditate-orbit li span {
+display: block;
+background: var(--cream-2); border: 1px solid var(--line); border-radius: 100px;
+padding: 0.6rem 1.1rem; font-family: var(--sans); font-size: 0.82rem; font-weight: 500;
+white-space: nowrap; box-shadow: 0 8px 16px -10px rgba(26,22,18,0.12);
+animation: meditateBob 4s ease-in-out infinite;
+animation-delay: calc(var(--i) * 0.2s);
+}
+@keyframes meditateBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@media (max-width: 1150px) { .meditate-orbit { --radius: 210px; } .meditate-orbit li span { font-size: 0.78rem; padding: 0.5rem 0.9rem; } }
+@media (max-width: 900px) { .meditate-orbit { --radius: 165px; } .meditate-orbit li span { font-size: 0.72rem; padding: 0.45rem 0.8rem; } .meditate-wrap { min-height: 440px; } }
+@media (max-width: 640px) {
+.meditate-wrap { flex-direction: column; min-height: auto; gap: 0; padding: 0.5rem 0 1rem; }
+.meditate-aura { display: none; }
+.meditate-fig { width: 88px; height: 88px; margin-bottom: 0.4rem; }
+.meditate-orbit {
+position: relative; list-style: none; display: flex; flex-direction: column;
+align-items: center; gap: 0.85rem; width: 100%; padding-top: 0.6rem;
+}
+.meditate-orbit::before {
+content: ''; position: absolute; top: 0; bottom: 18px; left: 50%;
+width: 1px; background: linear-gradient(to bottom, transparent, var(--line) 12%, var(--line) 88%, transparent);
+transform: translateX(-50%); z-index: 0;
+}
+.meditate-orbit li {
+position: relative; top: 0; left: 0; transform: none !important; opacity: 0;
+width: 100%; display: flex; justify-content: center; padding: 0; box-sizing: border-box;
+}
+.meditate-orbit li:nth-child(odd) span { margin-right: 44px; animation: meditateBobOdd 3.6s ease-in-out infinite; }
+.meditate-orbit li:nth-child(even) span { margin-left: 44px; animation: meditateBobEven 3.6s ease-in-out infinite; }
+.meditate-wrap.in .meditate-orbit li span { animation-delay: calc(var(--i) * 0.2s); }
+@keyframes meditateBobOdd { 0%, 100% { transform: rotate(-0.7deg) translateY(0); } 50% { transform: rotate(-0.7deg) translateY(-7px); } }
+@keyframes meditateBobEven { 0%, 100% { transform: rotate(0.7deg) translateY(0); } 50% { transform: rotate(0.7deg) translateY(-7px); } }
+.meditate-wrap.in .meditate-orbit li { opacity: 1; }
+.meditate-orbit li span {
+white-space: normal; text-align: center;
+padding: 0.65rem 1.1rem; font-size: 0.85rem; max-width: 180px;
+box-shadow: 0 10px 18px -10px rgba(26,22,18,0.16);
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.meditate-aura, .meditate-third-eye { animation: none; }
+.meditate-wrap.in .meditate-orbit li { opacity: 1; }
+.meditate-orbit li span { animation: none; }
+}
+
 /* ---------- Accessibility fallbacks ---------- */
 @media (prefers-reduced-motion: reduce) {
 html { scroll-behavior: auto; }
@@ -1370,12 +1441,51 @@ View work
 </div>
 </section>
 
+<!-- APPROACH -->
+<section id="approach">
+<div class="container">
+<div class="section-head reveal">
+<div>
+<span class="section-num">03 — Approach</span>
+<h2 class="section-title">What my day-to-day <span class="italic">looks like.</span></h2>
+</div>
+<p class="section-desc">Same handful of things, on repeat, whichever ticket I'm on.</p>
+</div>
+
+<div class="meditate-wrap reveal">
+<div class="meditate-aura"></div>
+<div class="meditate-aura a2"></div>
+<div class="meditate-fig" aria-hidden="true">
+<svg viewBox="0 0 100 100">
+<g fill="none" stroke="#1a1612" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+<path d="M28 74 Q22 58 32 48 Q40 40 50 40 Q60 40 68 48 Q78 58 72 74 Q50 84 28 74Z" fill="#ebe3d5"/>
+<circle cx="50" cy="24" r="13" fill="#ebe3d5"/>
+<path d="M43 24 h4 M53 24 h4"/>
+<path d="M45 31 Q50 34 55 31"/>
+<circle class="meditate-third-eye" cx="50" cy="16" r="1.8" fill="#b53b0a" stroke="none"/>
+<circle cx="34" cy="74" r="5" fill="#ebe3d5"/>
+<circle cx="66" cy="74" r="5" fill="#ebe3d5"/>
+</g>
+</svg>
+</div>
+<ul class="meditate-orbit" aria-label="What I do day to day">
+<li style="--i:0"><span>Understand business problems</span></li>
+<li style="--i:1"><span>Design maintainable systems</span></li>
+<li style="--i:2"><span>Debug unpredictable failures</span></li>
+<li style="--i:3"><span>Question generated code</span></li>
+<li style="--i:4"><span>Communicate trade-offs</span></li>
+<li style="--i:5"><span>Use AI without surrendering judgement</span></li>
+</ul>
+</div>
+</div>
+</section>
+
 <!-- EDUCATION -->
 <section class="education" id="education">
 <div class="container">
 <div class="section-head reveal">
 <div>
-<span class="section-num">03 — Education</span>
+<span class="section-num">04 — Education</span>
 <h2 class="section-title">Where I <span class="italic">learned.</span></h2>
 </div>
 <p class="section-desc">A path built step by step — from diploma to degree to daily production learning.</p>
@@ -1409,7 +1519,7 @@ View work
 <div class="container">
 <div class="section-head reveal">
 <div>
-<span class="section-num">04 — Selected work</span>
+<span class="section-num">05 — Selected work</span>
 <h2 class="section-title">Things I've <span class="italic">built.</span></h2>
 </div>
 <p class="section-desc">A selection of systems I've owned — from recurring ticketing to agentic AI pipelines.</p>
@@ -1510,7 +1620,7 @@ View work
 <div class="container">
 <div class="section-head reveal">
 <div>
-<span class="section-num">05 — Writing</span>
+<span class="section-num">06 — Writing</span>
 <h2 class="section-title">Things I've <span class="italic">written.</span></h2>
 </div>
 <p class="section-desc">Notes from building — on Medium, when something's worth writing down.</p>
@@ -1548,7 +1658,7 @@ View work
 <div class="container">
 <div class="section-head reveal">
 <div>
-<span class="section-num">06 — Experience</span>
+<span class="section-num">07 — Experience</span>
 <h2 class="section-title">Where I've <span class="italic">worked.</span></h2>
 </div>
 <p class="section-desc">Two companies, one through-line: owning problems end-to-end.</p>
