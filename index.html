@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<meta name="theme-color" content="#f3ede3" id="themeColorMeta">
+<meta name="theme-color" content="#f4eee4" id="themeColorMeta">
 <title>Kundan Singh — Software & AI Engineer</title>
 
 <!-- Microsoft Clarity -->
@@ -22,7 +22,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9B%A0%3C/text%3E%3C/svg%3E">
 
-<!-- Google Fonts with graceful offline system fallback -->
+<!-- Google Fonts with offline system fallback -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -41,7 +41,7 @@ html {
 :root {
   --cream: #f4eee4;
   --cream-2: #ebe3d5;
-  --surface-elevated: rgba(255, 252, 246, 0.72);
+  --surface-elevated: rgba(255, 252, 246, 0.78);
   --ink: #181411;
   --ink-soft: #3d352d;
   --muted: #6e6455;
@@ -54,6 +54,8 @@ html {
   --nav-bg: rgba(244, 238, 228, 0.82);
   --card-shadow: 0 20px 40px -15px rgba(24, 20, 17, 0.07);
   --spotlight: rgba(194, 65, 12, 0.09);
+  --cmd-bg: rgba(248, 243, 235, 0.94);
+  --cmd-pane: rgba(235, 227, 213, 0.55);
 
   --serif: 'Instrument Serif', 'Iowan Old Style', 'Apple Garamond', 'Baskerville', Georgia, serif;
   --sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -76,6 +78,8 @@ html[data-theme="dark"] {
   --nav-bg: rgba(15, 13, 11, 0.82);
   --card-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.5);
   --spotlight: rgba(234, 88, 12, 0.13);
+  --cmd-bg: rgba(22, 19, 16, 0.94);
+  --cmd-pane: rgba(15, 13, 11, 0.65);
 }
 
 ::selection {
@@ -94,7 +98,6 @@ body {
   transition: background-color 0.35s ease, color 0.35s ease;
 }
 
-/* Subtle tactile grain overlay */
 body::before {
   content: "";
   position: fixed;
@@ -105,7 +108,6 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Subtle ambient background glow */
 .ambient-mesh {
   position: fixed;
   inset: 0;
@@ -201,29 +203,32 @@ nav.scrolled {
 
 .cmd-btn, .theme-btn {
   background: var(--cream-2);
-  border: 1px solid var(--line);
-  color: var(--ink-soft);
-  padding: 0.42rem 0.75rem;
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  padding: 0.44rem 0.85rem;
   border-radius: 100px;
   font-size: 0.74rem;
   font-family: var(--mono);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   transition: all 0.25s ease;
 }
 
 .cmd-btn:hover, .theme-btn:hover {
-  border-color: var(--ink);
-  color: var(--ink);
+  border-color: var(--accent);
+  color: var(--accent);
   transform: translateY(-1px);
 }
 
 .cmd-btn kbd {
   font-family: var(--mono);
-  font-size: 0.68rem;
-  opacity: 0.75;
+  font-size: 0.66rem;
+  background: var(--cream);
+  padding: 0.1rem 0.38rem;
+  border-radius: 5px;
+  border: 1px solid var(--line);
 }
 
 .menu-btn {
@@ -789,7 +794,7 @@ section { padding: 6.5rem 0; position: relative; }
   text-transform: uppercase;
 }
 
-/* ---------- Skills Bento with Spotlight ---------- */
+/* ---------- Skills Bento ---------- */
 .bento {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -807,7 +812,6 @@ section { padding: 6.5rem 0; position: relative; }
   overflow: hidden;
 }
 
-/* Mouse-tracking spotlight overlay */
 .bento-card::before,
 .project::before {
   content: '';
@@ -875,10 +879,11 @@ section { padding: 6.5rem 0; position: relative; }
   border-radius: 100px;
   font-size: 0.75rem;
   font-weight: 500;
-  transition: transform 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.bento-tag:hover { transform: translateY(-1px); }
+.bento-tag:hover { transform: translateY(-1px); border-color: var(--accent); }
 .dark .bento-tag { background: rgba(243, 237, 227, 0.1); border-color: rgba(243, 237, 227, 0.14); }
 .accent .bento-tag, .sage .bento-tag { background: rgba(243, 237, 227, 0.18); border-color: transparent; }
 
@@ -904,7 +909,6 @@ section { padding: 6.5rem 0; position: relative; }
 .bento-list .check { color: var(--accent); font-style: italic; font-family: var(--serif); }
 .dark .bento-list .check { color: var(--accent-soft); }
 
-/* Bento decorative SVGs */
 .bento-1::after { content:''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='none' stroke='%23f3ede3' stroke-width='2.2' opacity='0.07'><rect x='14' y='10' width='92' height='22' rx='4'/><circle cx='26' cy='21' r='2.4' fill='%23f3ede3'/><rect x='14' y='42' width='92' height='22' rx='4'/><circle cx='26' cy='53' r='2.4' fill='%23f3ede3'/><rect x='14' y='74' width='92' height='22' rx='4'/><circle cx='26' cy='85' r='2.4' fill='%23f3ede3'/></g></svg>"); background-repeat: no-repeat; background-position: right -14px bottom -14px; background-size: 250px; pointer-events: none; }
 .bento-3::after { content:''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='none' stroke='%23f3ede3' stroke-width='2.2' opacity='0.16'><circle cx='28' cy='28' r='5'/><circle cx='94' cy='24' r='5'/><circle cx='60' cy='62' r='6'/><circle cx='22' cy='94' r='5'/><circle cx='98' cy='90' r='5'/><line x1='28' y1='28' x2='60' y2='62'/><line x1='94' y1='24' x2='60' y2='62'/><line x1='60' y1='62' x2='22' y2='94'/><line x1='60' y1='62' x2='98' y2='90'/></g></svg>"); background-repeat: no-repeat; background-position: right -14px bottom -14px; background-size: 190px; pointer-events: none; }
 .bento-label, .bento-title, .bento-desc, .bento-tags, .bento-list, .bento-big-num { position: relative; z-index: 1; }
@@ -996,7 +1000,7 @@ section { padding: 6.5rem 0; position: relative; }
   line-height: 1.65;
 }
 
-/* ---------- Projects with Filter Tabs & Architecture Diagrams ---------- */
+/* ---------- Projects ---------- */
 .filter-bar {
   display: flex;
   gap: 0.5rem;
@@ -1087,7 +1091,6 @@ section { padding: 6.5rem 0; position: relative; }
 .pv-5 { background: linear-gradient(135deg, #3f4f36, #141a11); }
 .pv-6 { background: linear-gradient(135deg, #332c25, #14110e); }
 
-/* Architecture Flow Inside Project Cards */
 .arch-badge {
   position: absolute;
   top: 0.85rem;
@@ -1402,12 +1405,13 @@ section { padding: 6.5rem 0; position: relative; }
 }
 .socials a:hover { color: var(--accent); }
 
-/* ---------- Modal (Project Deep-Dive & Command Palette) ---------- */
+/* ---------- Modal Base ---------- */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 13, 11, 0.65);
-  backdrop-filter: blur(8px);
+  background: rgba(12, 10, 8, 0.68);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   z-index: 300;
   display: flex;
   align-items: center;
@@ -1415,7 +1419,7 @@ section { padding: 6.5rem 0; position: relative; }
   padding: 1.2rem;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.22s ease;
 }
 .modal-backdrop.open {
   opacity: 1;
@@ -1431,7 +1435,7 @@ section { padding: 6.5rem 0; position: relative; }
   padding: 2.2rem;
   box-shadow: 0 32px 64px -16px rgba(0,0,0,0.45);
   transform: translateY(16px) scale(0.98);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
 }
 .modal-backdrop.open .modal-card {
@@ -1458,45 +1462,443 @@ section { padding: 6.5rem 0; position: relative; }
   margin: 1.2rem 0 0.4rem;
 }
 
-/* Command Palette */
-.cmd-card {
-  max-width: 520px;
-  padding: 1rem;
-}
-.cmd-input {
+/* ==========================================================================
+   MACBOOK SPOTLIGHT / RAYCAST INTELLIGENT COMMAND PALETTE
+   ========================================================================== */
+.spotlight-card {
+  max-width: 960px;
   width: 100%;
+  padding: 0;
+  overflow: hidden;
+  background: var(--cmd-bg);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid var(--line-strong);
+  border-radius: 22px;
+  box-shadow:
+    0 40px 90px -20px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  display: flex;
+  flex-direction: column;
+  max-height: min(680px, 88vh);
+}
+
+/* Top Search Bar */
+.sp-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem 1.35rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.sp-search-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.sp-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 500;
+  outline: none;
+}
+
+.sp-input::placeholder {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.sp-count-badge {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  background: var(--cream-2);
+  border: 1px solid var(--line);
+  padding: 0.22rem 0.6rem;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.sp-esc-btn {
+  background: var(--cream-2);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.sp-esc-btn:hover { color: var(--ink); border-color: var(--ink); }
+
+/* Quick Filter Chips Bar */
+.sp-chips {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1.35rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--cmd-pane);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.sp-chips::-webkit-scrollbar { display: none; }
+
+.sp-chips-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-right: 0.25rem;
+  white-space: nowrap;
+}
+
+.sp-chip {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  padding: 0.28rem 0.7rem;
+  border-radius: 100px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.sp-chip:hover,
+.sp-chip.active {
+  background: var(--accent);
+  color: #f3ede3;
+  border-color: var(--accent);
+}
+
+/* Dual-Pane Body */
+.sp-body {
+  display: grid;
+  grid-template-columns: 330px 1fr;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Left Pane: Results List */
+.sp-list-pane {
+  border-right: 1px solid var(--line);
+  overflow-y: auto;
+  padding: 0.65rem;
+  background: var(--cmd-pane);
+}
+
+.sp-group-title {
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  padding: 0.55rem 0.65rem 0.3rem;
+}
+
+.sp-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.sp-item:hover {
+  background: var(--cream-2);
+}
+
+.sp-item.selected {
+  background: var(--accent);
+  color: #f3ede3;
+  box-shadow: 0 6px 16px -6px var(--accent-glow);
+}
+
+.sp-item-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.sp-item-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.sp-item.selected .sp-item-icon {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+.sp-item-titles {
+  min-width: 0;
+}
+
+.sp-item-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sp-item-sub {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sp-item.selected .sp-item-sub {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.sp-item-badge {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 5px;
+  background: var(--cream);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.sp-item.selected .sp-item-badge {
+  background: rgba(0, 0, 0, 0.22);
+  color: #fff;
+  border-color: transparent;
+}
+
+/* Right Pane: Rich Knowledge Inspector */
+.sp-detail-pane {
+  padding: 1.5rem 1.75rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.sp-detail-head {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1rem;
+}
+
+.sp-detail-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.sp-detail-type {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+
+.sp-detail-meta {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+.sp-detail-title {
+  font-family: var(--serif);
+  font-size: 2.05rem;
+  line-height: 1.08;
+  font-weight: 400;
+  margin-bottom: 0.45rem;
+}
+
+.sp-detail-summary {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.62;
+}
+
+/* Metrics / Achievements Strip inside Inspector */
+.sp-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 0.6rem;
+}
+
+.sp-metric-box {
+  background: var(--cream-2);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 0.65rem 0.8rem;
+}
+
+.sp-metric-val {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-style: italic;
+  color: var(--accent);
+  line-height: 1.1;
+}
+
+.sp-metric-lbl {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+.sp-sec-label {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 0.45rem;
+}
+
+.sp-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.sp-bullets li {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.sp-bullets li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  color: var(--accent);
+  font-size: 0.7rem;
+}
+
+.sp-bullets li strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Connected Graph Pills */
+.sp-rel-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.sp-rel-pill {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  padding: 0.3rem 0.68rem;
+  border-radius: 100px;
   background: var(--cream-2);
   border: 1px solid var(--line-strong);
   color: var(--ink);
-  padding: 0.85rem 1rem;
-  border-radius: 12px;
-  font-family: var(--mono);
-  font-size: 0.86rem;
-  outline: none;
-  margin-bottom: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
-.cmd-list {
-  list-style: none;
-  max-height: 280px;
-  overflow-y: auto;
+
+.sp-rel-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
 }
-.cmd-item {
-  padding: 0.7rem 0.9rem;
-  border-radius: 10px;
+
+.sp-detail-actions {
+  margin-top: auto;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.sp-jump-btn {
+  background: var(--ink);
+  color: var(--cream);
+  border: none;
+  padding: 0.55rem 1.1rem;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 0.86rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: background 0.2s ease;
 }
-.cmd-item:hover {
-  background: var(--cream-2);
-  color: var(--accent);
+.sp-jump-btn:hover {
+  background: var(--accent);
+  color: #f3ede3;
 }
-.cmd-item span:last-child {
+
+/* Bottom Footer Bar of Spotlight */
+.sp-footer {
+  padding: 0.6rem 1.35rem;
+  border-top: 1px solid var(--line);
+  background: var(--cmd-pane);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-family: var(--mono);
-  font-size: 0.7rem;
+  font-size: 0.66rem;
   color: var(--muted);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sp-keys {
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.sp-keys kbd {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  padding: 0.1rem 0.38rem;
+  border-radius: 4px;
+  font-size: 0.62rem;
+  color: var(--ink);
 }
 
 /* ---------- Footer ---------- */
@@ -1531,7 +1933,6 @@ footer .built {
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .nav-links { display: none; }
-  .cmd-btn { display: none; }
   .menu-btn { display: block; }
 
   .nav-links.open {
@@ -1573,6 +1974,17 @@ footer .built {
   .meditate-orbit { --radius: 165px; }
   .meditate-orbit li { font-size: 0.76rem; padding: 0.5rem 0.85rem; }
   .meditate-wrap { min-height: 440px; }
+
+  /* Spotlight responsive stack */
+  .sp-body {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+  .sp-list-pane {
+    max-height: 190px;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
 }
 
 @media (max-width: 640px) {
@@ -1580,6 +1992,7 @@ footer .built {
   .meditate-orbit { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
   .meditate-orbit li { position: static; transform: none !important; white-space: normal; text-align: center; }
   .meditate-orbit li span { animation: none; display: inline; }
+  .cmd-btn span { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1608,8 +2021,8 @@ footer .built {
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-actions">
-    <button class="cmd-btn" id="cmdBtn" type="button" aria-label="Open command palette">
-      <span>Command</span> <kbd>⌘K</kbd>
+    <button class="cmd-btn" id="cmdBtn" type="button" aria-label="Open intelligent Spotlight search">
+      <span>Search stack, projects, AI...</span> <kbd>⌘K</kbd>
     </button>
     <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle color theme">
       <span id="themeIcon">◐</span>
@@ -1720,7 +2133,7 @@ footer .built {
         Explore selected work
         <span class="arrow">→</span>
       </a>
-      <a href="#contact" class="btn btn-outline">Get in touch</a>
+      <button type="button" class="btn btn-outline" id="heroAskBtn">Ask Spotlight ⌘K</button>
     </div>
   </div>
 </div>
@@ -1820,7 +2233,7 @@ footer .built {
       <span class="section-num">02 — Toolkit</span>
       <h2 class="section-title">What I <span class="italic">work with.</span></h2>
     </div>
-    <p class="section-desc">A stack refined across fintech, event-tech, and AI — chosen for throughput and reliability at scale.</p>
+    <p class="section-desc">Click any technology tag below to inspect how I've used it in production via Spotlight.</p>
   </div>
 
   <div class="bento">
@@ -1829,13 +2242,13 @@ footer .built {
       <div class="bento-title">Event-driven systems that hold up under load.</div>
       <p style="opacity:0.75; margin-top:0.5rem; font-size:0.94rem;">Java across versions 8, 11, 17, 21 — with Spring Boot, WebFlux, and Kafka as the backbone of everything I ship.</p>
       <div class="bento-tags">
-        <span class="bento-tag">Java 21</span>
-        <span class="bento-tag">Spring Boot</span>
-        <span class="bento-tag">Spring WebFlux</span>
-        <span class="bento-tag">Spring Cloud</span>
-        <span class="bento-tag">Kafka</span>
-        <span class="bento-tag">Redis</span>
-        <span class="bento-tag">Maven</span>
+        <span class="bento-tag" data-search="Java">Java 21</span>
+        <span class="bento-tag" data-search="Spring Boot">Spring Boot</span>
+        <span class="bento-tag" data-search="Spring WebFlux">Spring WebFlux</span>
+        <span class="bento-tag" data-search="Spring Boot">Spring Cloud</span>
+        <span class="bento-tag" data-search="Kafka">Kafka</span>
+        <span class="bento-tag" data-search="Redis">Redis</span>
+        <span class="bento-tag" data-search="Java">Maven</span>
       </div>
     </div>
 
@@ -1843,14 +2256,14 @@ footer .built {
       <div class="bento-label">Frontend</div>
       <div class="bento-title">Interfaces that feel fast and stay reliable.</div>
       <div class="bento-tags">
-        <span class="bento-tag">Angular 17+</span>
-        <span class="bento-tag">React</span>
-        <span class="bento-tag">TypeScript</span>
-        <span class="bento-tag">RxJS</span>
-        <span class="bento-tag">NgRx</span>
-        <span class="bento-tag">Signals</span>
-        <span class="bento-tag">SSR</span>
-        <span class="bento-tag">Tailwind</span>
+        <span class="bento-tag" data-search="Angular">Angular 17+</span>
+        <span class="bento-tag" data-search="Angular">React</span>
+        <span class="bento-tag" data-search="Angular">TypeScript</span>
+        <span class="bento-tag" data-search="Angular">RxJS</span>
+        <span class="bento-tag" data-search="Angular">NgRx</span>
+        <span class="bento-tag" data-search="Angular">Signals</span>
+        <span class="bento-tag" data-search="Angular">SSR</span>
+        <span class="bento-tag" data-search="Angular">Tailwind</span>
       </div>
     </div>
 
@@ -2255,26 +2668,59 @@ footer .built {
   </div>
 </div>
 
-<!-- COMMAND PALETTE MODAL (⌘K) -->
+<!-- ==========================================================================
+     INTELLIGENT MACBOOK SPOTLIGHT / RAYCAST COMMAND ENGINE MODAL (⌘K)
+     ========================================================================== -->
 <div class="modal-backdrop" id="cmdModal" aria-hidden="true">
-  <div class="modal-card cmd-card" role="dialog" aria-modal="true" aria-label="Command Palette">
-    <input type="text" class="cmd-input" id="cmdInput" placeholder="Type a command or section..." autocomplete="off">
-    <ul class="cmd-list" id="cmdList">
-      <li class="cmd-item" data-action="#work"><span>Jump to Selected Work</span><span>#work</span></li>
-      <li class="cmd-item" data-action="#skills"><span>Jump to Toolkit & AI Stack</span><span>#skills</span></li>
-      <li class="cmd-item" data-action="#experience"><span>Jump to Work Experience</span><span>#experience</span></li>
-      <li class="cmd-item" data-action="theme"><span>Toggle Dark / Light Theme</span><span>Theme</span></li>
-      <li class="cmd-item" data-action="copy"><span>Copy Email (sk.kundan.05@gmail.com)</span><span>Copy</span></li>
-      <li class="cmd-item" data-action="github"><span>Open GitHub (@kundanscode)</span><span>↗</span></li>
-      <li class="cmd-item" data-action="linkedin"><span>Open LinkedIn</span><span>↗</span></li>
-    </ul>
+  <div class="modal-card spotlight-card" role="dialog" aria-modal="true" aria-label="Intelligent Portfolio Spotlight">
+    <div class="sp-header">
+      <svg class="sp-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input
+        type="text"
+        class="sp-input"
+        id="cmdInput"
+        placeholder="Search any tech, skill, project, or metric (e.g., Java, Spring Boot, Ollama, Kafka, 65%...)"
+        autocomplete="off"
+      >
+      <span class="sp-count-badge" id="spCountBadge">18 topics</span>
+      <button type="button" class="sp-esc-btn" id="spCloseBtn">ESC</button>
+    </div>
+
+    <div class="sp-chips" id="spChips">
+      <span class="sp-chips-label">Try:</span>
+      <button type="button" class="sp-chip" data-query="Java">Java</button>
+      <button type="button" class="sp-chip" data-query="Spring Boot">Spring Boot</button>
+      <button type="button" class="sp-chip" data-query="Ollama">Ollama & AI</button>
+      <button type="button" class="sp-chip" data-query="Kafka">Kafka</button>
+      <button type="button" class="sp-chip" data-query="Redis">Redis & 65% Perf</button>
+      <button type="button" class="sp-chip" data-query="Angular">Angular 17+</button>
+      <button type="button" class="sp-chip" data-query="Seasons">Seasons Ticketing</button>
+      <button type="button" class="sp-chip" data-query="Fintech">Fintech & Payments</button>
+    </div>
+
+    <div class="sp-body">
+      <div class="sp-list-pane" id="spListPane" role="listbox" aria-label="Search results"></div>
+      <div class="sp-detail-pane" id="spDetailPane" aria-live="polite"></div>
+    </div>
+
+    <div class="sp-footer">
+      <div class="sp-keys">
+        <span><kbd>↑</kbd><kbd>↓</kbd> Navigate</span>
+        <span><kbd>↵</kbd> Jump / Execute</span>
+        <span><kbd>ESC</kbd> Close</span>
+      </div>
+      <div>Semantic Knowledge Graph · Kundan Singh</div>
+    </div>
   </div>
 </div>
 
 <footer>
   <div>© 2026 Kundan Singh</div>
   <div class="built">Designed & engineered with care, in Mumbai.</div>
-  <div>v. 2.0 · Press ⌘K</div>
+  <div>v. 2.5 · Spotlight Engine (⌘K)</div>
 </footer>
 
 <script>
@@ -2293,7 +2739,7 @@ themeBtn.addEventListener('click', () => {
   applyTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
 });
 
-// ---------- Nav Scroll & Active Section Highlight ----------
+// ---------- Nav Scroll ----------
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
@@ -2326,7 +2772,7 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// ---------- 3D Cursor Spotlight on Bento & Project Cards ----------
+// ---------- 3D Cursor Spotlight ----------
 document.querySelectorAll('.bento-card, .project').forEach(card => {
   card.addEventListener('mousemove', (e) => {
     const rect = card.getBoundingClientRect();
@@ -2553,12 +2999,19 @@ document.querySelectorAll('.bento-card, .project').forEach(card => {
   window.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 })();
 
-// ---------- Command Palette (⌘K / Ctrl+K) & Copy Email ----------
+// ==========================================================================
+// INTELLIGENT SPOTLIGHT / RAYCAST KNOWLEDGE GRAPH & SEARCH ENGINE
+// ==========================================================================
 (function () {
   const cmdModal = document.getElementById('cmdModal');
   const cmdBtn = document.getElementById('cmdBtn');
+  const heroAskBtn = document.getElementById('heroAskBtn');
+  const closeBtn = document.getElementById('spCloseBtn');
   const cmdInput = document.getElementById('cmdInput');
-  const cmdItems = document.querySelectorAll('.cmd-item');
+  const listPane = document.getElementById('spListPane');
+  const detailPane = document.getElementById('spDetailPane');
+  const countBadge = document.getElementById('spCountBadge');
+  const chipBtns = document.querySelectorAll('.sp-chip');
   const copyBtn = document.getElementById('copyEmailBtn');
 
   const copyEmail = () => {
@@ -2571,50 +3024,693 @@ document.querySelectorAll('.bento-card, .project').forEach(card => {
   };
   if (copyBtn) copyBtn.addEventListener('click', copyEmail);
 
-  const toggleCmd = (open) => {
+  // Structured Semantic Knowledge Graph covering all skills, projects, companies, and metrics
+  const KNOWLEDGE_GRAPH = [
+    {
+      id: 'java',
+      category: 'Technologies & Skills',
+      icon: 'JV',
+      title: 'Java (8, 11, 17, 21) & Concurrency',
+      subtitle: '4 Years · Core Backend & Multithreading',
+      badge: 'Core Stack',
+      keywords: ['java', 'jdk', 'jvm', 'java 21', 'java 17', 'java 11', 'java 8', 'maven', 'concurrency', 'multithreading', 'executorservice', 'completablefuture', 'threads', 'backend', 'ta4j', 'collections', 'streams'],
+      summary: 'Primary backend language across 4 years of production engineering in fintech and event-tech — spanning Java 8 through Java 21 across 30+ microservices, low-latency reactive pipelines, and fault-isolated concurrent batch engines.',
+      metrics: [
+        { val: '4 yrs', lbl: 'Production Java' },
+        { val: '30+', lbl: 'Microservices' },
+        { val: '65%', lbl: 'Perf. Gain' }
+      ],
+      implementations: [
+        '<strong>Seasons Recurring Ticketing (Java 21):</strong> Built recurrence-rule modeling, per-occurrence validation, QR cryptographic verification, and PIN-protected Hide Ticket privacy controls at Kayana Technologies.',
+        '<strong>High-Throughput Concurrency Engine:</strong> Engineered a bulk-record processor using bounded <code>ExecutorService</code> worker pools, <code>CompletableFuture</code> pipelines, blocking-queue backpressure, and per-record retry isolation.',
+        '<strong>Fintech & Collection Microservices (Java 17):</strong> Delivered Loan Onboarding, eKYC, Lead Management, Visit Tracking, and Banking Reconciliation services at Home First Finance.',
+        '<strong>Algorithmic Trading Bot:</strong> Built real-time technical-indicator backtesting and execution with <code>ta4j</code> and reactive streams.'
+      ],
+      related: ['Spring Boot', 'Spring WebFlux', 'Seasons', 'Threads', 'Kafka', 'Signals'],
+      section: '#skills'
+    },
+    {
+      id: 'spring-boot',
+      category: 'Technologies & Skills',
+      icon: 'SB',
+      title: 'Spring Boot, Cloud & Spring AI',
+      subtitle: '30+ Microservices · Multi-Tenant Architecture',
+      badge: 'Framework',
+      keywords: ['spring', 'spring boot', 'spring cloud', 'spring ai', 'jpa', 'hibernate', 'rest api', 'microservices', 'jpql', 'mvnw', 'backend', 'multi-tenant'],
+      summary: 'Backbone framework for designing and scaling 30+ production microservices across multi-tenant event platforms, housing finance portals, and model-agnostic LLM orchestration pipelines.',
+      metrics: [
+        { val: '30+', lbl: 'Microservices' },
+        { val: '2', lbl: 'Core Domains' },
+        { val: 'E2E', lbl: 'API Ownership' }
+      ],
+      implementations: [
+        '<strong>Multi-Tenant Platform (Kayana):</strong> Owned API contract design, entity interceptors, and rollout across 30+ Spring Boot microservices.',
+        '<strong>Payment & Aggregator Integrations:</strong> Integrated Ryft recurring subscriptions, Stripe card tokenization, STREAM food delivery, and UrbanPiper aggregator workflows.',
+        '<strong>Spring AI Orchestration:</strong> Chained Google Cloud Vision OCR, local Ollama extraction, and Groq Llama-3.3-70B routing inside a unified Spring Boot service.',
+        '<strong>Data & Transactional Integrity:</strong> Combined Spring Data JPA/Hibernate, custom JPQL queries, Flyway migrations, and Redis caching to cut API latency by 65%.'
+      ],
+      related: ['Java', 'Spring WebFlux', 'Ollama', 'Seasons', 'Collection', 'Audit'],
+      section: '#skills'
+    },
+    {
+      id: 'webflux',
+      category: 'Technologies & Skills',
+      icon: 'RX',
+      title: 'Spring WebFlux & Reactive Systems',
+      subtitle: 'Non-Blocking Event Loops · Project Reactor',
+      badge: 'Reactive',
+      keywords: ['webflux', 'reactive', 'mono', 'flux', 'netty', 'non-blocking', 'async', 'streaming', 'backpressure', 'reactor'],
+      summary: 'Used to build high-concurrency, non-blocking APIs and live market-tick streaming pipelines where low tail-latency and backpressure control are critical.',
+      metrics: [
+        { val: 'Netty', lbl: 'Event Loop' },
+        { val: 'Mono/Flux', lbl: 'Reactive Core' },
+        { val: 'Live', lbl: 'Tick Ingestion' }
+      ],
+      implementations: [
+        '<strong>Reactive Ticket Issuance & Check-In:</strong> Non-blocking <code>Mono</code>/<code>Flux</code> pipelines at Kayana combining persistence, QR signing, and asynchronous Kafka event publishing with strict timeouts.',
+        '<strong>Algorithmic Trading Stream:</strong> Built reactive ingestion of Angel One brokerage ticks, windowed technical-indicator evaluation, and automated order execution.'
+      ],
+      related: ['Spring Boot', 'Kafka', 'Signals', 'Java'],
+      section: '#skills'
+    },
+    {
+      id: 'ollama-ai',
+      category: 'Technologies & Skills',
+      icon: 'AI',
+      title: 'Ollama, Groq (Llama 3.3-70B) & Agentic AI',
+      subtitle: 'Spring AI · Vision OCR · Claude Workflows',
+      badge: 'Agentic AI',
+      keywords: ['ollama', 'ai', 'agentic', 'llm', 'groq', 'llama', 'llama 3.3', '70b', 'ocr', 'google cloud vision', 'spring ai', 'claude', 'automation', 'prompt', 'extraction', 'routing'],
+      summary: 'Designs and ships model-agnostic agentic AI pipelines in production — chaining optical character recognition, local LLM structured extraction, and ultra-fast cloud inference alongside daily AI-augmented engineering.',
+      metrics: [
+        { val: '70B', lbl: 'Llama 3.3 Routing' },
+        { val: '3-Stage', lbl: 'OCR → LLM → Route' },
+        { val: 'Prod', lbl: 'Automation' }
+      ],
+      implementations: [
+        '<strong>Document Ingestion & Vision OCR:</strong> Automated raw text and layout extraction from unstructured documents using Google Cloud Vision OCR.',
+        '<strong>Local LLM Extraction with Ollama:</strong> Parsed noisy OCR outputs into strict, validated domain schemas using local Ollama/Llama models.',
+        '<strong>High-Speed Decision Routing with Groq:</strong> Leveraged Groq (Llama 3.3-70B) via Spring AI for low-latency classification, confidence scoring, and workflow routing.',
+        '<strong>AI-Augmented Engineering:</strong> Daily power user of Claude and IDE-based LLM tooling to debug reactive WebFlux chains, audit JPQL queries, and accelerate delivery without sacrificing human code review.'
+      ],
+      related: ['Spring Boot', 'Agentic', 'Java'],
+      section: '#skills'
+    },
+    {
+      id: 'kafka',
+      category: 'Technologies & Skills',
+      icon: 'KF',
+      title: 'Apache Kafka & Event-Driven Pipelines',
+      subtitle: 'Kafka Streams · Async Choreographies',
+      badge: 'Messaging',
+      keywords: ['kafka', 'kafka streams', 'events', 'event-driven', 'queue', 'messaging', 'pubsub', 'async', 'broker', 'consumer', 'producer'],
+      summary: 'Core messaging backbone used to decouple microservices, absorb traffic spikes, and drive real-time notifications, ticketing events, and financial background jobs.',
+      metrics: [
+        { val: '30+', lbl: 'Connected Services' },
+        { val: 'Async', lbl: 'Job Choreography' },
+        { val: 'Real-Time', lbl: 'Tick & Audit Events' }
+      ],
+      implementations: [
+        '<strong>Seasons & Multi-Tenant Event Bus (Kayana):</strong> Published ticket issuance, occurrence check-in, and field-level audit events across microservices.',
+        '<strong>Fintech Background Workflows (Home First):</strong> Implemented Kafka-driven asynchronous pipelines for loan onboarding, eKYC verification, and payment reconciliation.',
+        '<strong>Market Data Streaming:</strong> Used Kafka topics to buffer and replay live brokerage ticks for algorithmic trading backtests and paper trading.'
+      ],
+      related: ['Spring Boot', 'Spring WebFlux', 'Seasons', 'Signals', 'Collection'],
+      section: '#skills'
+    },
+    {
+      id: 'redis-db',
+      category: 'Technologies & Skills',
+      icon: 'DB',
+      title: 'PostgreSQL, MySQL, Redis & 65% Perf Gain',
+      subtitle: 'Query Tuning · Caching · Flyway · Hibernate',
+      badge: 'Data & Perf',
+      keywords: ['redis', 'postgresql', 'postgres', 'mysql', 'sql', 'database', 'caching', 'performance', '65%', 'latency', 'indexing', 'flyway', 'hibernate', 'jpa', 'transactions'],
+      summary: 'Deep focus on relational data modeling, schema evolution with Flyway, composite index optimization, and distributed Redis caching to slash production latency under load.',
+      metrics: [
+        { val: '65%', lbl: 'Perf. Improvement' },
+        { val: 'ACID', lbl: 'Transactional Integrity' },
+        { val: 'Zero', lbl: 'Downtime Migrations' }
+      ],
+      implementations: [
+        '<strong>65% Production Performance Boost:</strong> Diagnosed slow queries at Home First Finance and implemented Redis caching layers, composite MySQL indexing, and tuned JPA transactions.',
+        '<strong>Multi-Tenant PostgreSQL Schemas:</strong> Modeled complex recurrence rules, occurrence states, and immutable field-level audit logs in PostgreSQL at Kayana.',
+        '<strong>Banking Reconciliation Engine:</strong> Built high-integrity financial settlement and reconciliation workflows with strict transactional guarantees.'
+      ],
+      related: ['Spring Boot', 'Collection', 'Seasons', 'Audit'],
+      section: '#skills'
+    },
+    {
+      id: 'angular-frontend',
+      category: 'Technologies & Skills',
+      icon: 'NG',
+      title: 'Angular 17+, Signals, SSR & React',
+      subtitle: 'TypeScript · RxJS · NgRx · Tailwind',
+      badge: 'Frontend',
+      keywords: ['angular', 'angular 17', 'signals', 'ssr', 'rxjs', 'ngrx', 'react', 'typescript', 'javascript', 'tailwind', 'frontend', 'ui', '35%', '40%'],
+      summary: 'Full-stack frontend capability focused on reactive state management (RxJS, Signals, NgRx) and Server-Side Rendering (SSR) for fast, low-defect enterprise web applications.',
+      metrics: [
+        { val: '35%', lbl: 'Faster Page Loads' },
+        { val: '40%', lbl: 'Fewer UI Defects' },
+        { val: 'v17+', lbl: 'Angular Signals & SSR' }
+      ],
+      implementations: [
+        '<strong>35% Faster Page Loads:</strong> Architected full-stack enterprise modules at Home First Finance using Angular 17+, Signals, RxJS, and SSR.',
+        '<strong>40% Reduction in UI Defects:</strong> Enforced strict TypeScript contracts, reactive form validation, and predictable state management across Collection and Verification portals.'
+      ],
+      related: ['Collection', 'Home First Finance', 'Java'],
+      section: '#skills'
+    },
+    {
+      id: 'cloud-devops',
+      category: 'Technologies & Skills',
+      icon: 'CL',
+      title: 'AWS, Docker, CI/CD & VAPT Security',
+      subtitle: 'EC2 · ECS · S3 · Jenkins · SonarQube',
+      badge: 'Cloud & Sec',
+      keywords: ['aws', 'cloud', 'docker', 'jenkins', 'sonarqube', 'ec2', 'ecs', 's3', 'codebuild', 'codepipeline', 'cicd', 'devops', 'vapt', 'security'],
+      summary: 'Production deployment, containerization, automated quality gates, and enterprise-wide security hardening across cloud infrastructure.',
+      metrics: [
+        { val: 'AWS', lbl: 'EC2 · ECS · S3' },
+        { val: 'VAPT', lbl: 'Security Lead' },
+        { val: 'CI/CD', lbl: 'CodePipeline & Jenkins' }
+      ],
+      implementations: [
+        '<strong>Cloud & CI/CD Automation:</strong> Deployed containerized microservices on AWS (EC2, ECS, S3) using Docker, Jenkins, AWS CodeBuild, CodePipeline, and SonarQube static analysis.',
+        '<strong>Company-Wide VAPT Leadership:</strong> Led the full Vulnerability Assessment and Penetration Testing (VAPT) exercise across all projects at Home First Finance, remediating security findings end-to-end.'
+      ],
+      related: ['Home First Finance', 'Kayana Technologies', 'Spring Boot'],
+      section: '#skills'
+    },
+    {
+      id: 'fintech-payments',
+      category: 'Technologies & Skills',
+      icon: 'FN',
+      title: 'Fintech, Payments & Aggregator Integrations',
+      subtitle: 'Stripe · Ryft · eKYC · Reconciliation · Angel One',
+      badge: 'Domain',
+      keywords: ['fintech', 'payments', 'stripe', 'ryft', 'urbanpiper', 'stream', 'ekyc', 'loans', 'reconciliation', 'banking', 'angel one', 'trading'],
+      summary: 'Extensive domain experience building payment gateways, subscription billing, housing-finance collection systems, banking reconciliation, and live brokerage trading integrations.',
+      metrics: [
+        { val: 'Stripe/Ryft', lbl: 'Payment Gateways' },
+        { val: 'eKYC', lbl: 'Onboarding Flows' },
+        { val: 'Live API', lbl: 'Brokerage Trading' }
+      ],
+      implementations: [
+        '<strong>Subscription & Card Tokenization (Kayana):</strong> Integrated Ryft payments for recurring subscriptions and Stripe card tokenization, alongside STREAM food delivery and UrbanPiper aggregator APIs.',
+        '<strong>Housing Finance & Reconciliation (Home First):</strong> Built remote payment links, eKYC onboarding, legal/technical verification portals, and automated banking reconciliation.',
+        '<strong>Algorithmic Brokerage Execution:</strong> Integrated Angel One SmartAPI for live market-data ingestion, paper trading, and automated order routing.'
+      ],
+      related: ['Collection', 'Seasons', 'Signals', 'Kayana Technologies'],
+      section: '#work'
+    },
+    {
+      id: 'proj-seasons',
+      category: 'Projects & Systems',
+      icon: '01',
+      title: 'Seasons — Recurring Ticket System',
+      subtitle: '2026 · Event Tech · Java 21, Spring Boot, PostgreSQL, Kafka',
+      badge: 'Project',
+      keywords: ['seasons', 'ticket', 'recurring', 'qr', 'pin', 'privacy', 'event tech', 'kayana', 'java 21'],
+      summary: 'End-to-end recurring-ticket platform handling complex multi-occurrence event schedules, cryptographic QR check-ins, and customer privacy controls.',
+      metrics: [
+        { val: 'Java 21', lbl: 'Core Runtime' },
+        { val: 'QR + PIN', lbl: 'Security & Privacy' },
+        { val: 'E2E', lbl: 'Owned Delivery' }
+      ],
+      implementations: [
+        'Modeled recurrence rules and automated per-occurrence validation across event creation, update, and check-in flows.',
+        'Implemented QR-based ticket verification and a PIN-protected "Hide Ticket" privacy feature for attendees.',
+        'Wired Kafka event streams to synchronize ticket state across 30+ platform microservices.'
+      ],
+      related: ['Java', 'Spring Boot', 'Kafka', 'Kayana Technologies'],
+      section: '#work'
+    },
+    {
+      id: 'proj-collection',
+      category: 'Projects & Systems',
+      icon: '02',
+      title: 'Collection Management & Verification Portal',
+      subtitle: '2024 · Fintech · Java 17, Spring Boot, Angular 17, Redis',
+      badge: 'Project',
+      keywords: ['collection', 'fintech', 'loans', 'ekyc', 'verification', 'legal', 'home first', 'redis', 'angular 17'],
+      summary: 'Comprehensive collection management and legal/technical verification platform built for a housing finance company.',
+      metrics: [
+        { val: '65%', lbl: 'Faster Backend' },
+        { val: '35%', lbl: 'Faster Page Loads' },
+        { val: '5+', lbl: 'Core Microservices' }
+      ],
+      implementations: [
+        'Architected microservices for Loan Onboarding, eKYC, Lead Management, Visit Tracking, and Remote Payments.',
+        'Delivered Angular 17+ frontend with Signals and SSR, cutting UI defects by 40% and page load times by 35%.',
+        'Optimized high-load endpoints with Redis caching and MySQL query tuning for a 65% performance gain.'
+      ],
+      related: ['Java', 'Redis', 'Angular', 'Home First Finance'],
+      section: '#work'
+    },
+    {
+      id: 'proj-agentic',
+      category: 'Projects & Systems',
+      icon: '03',
+      title: 'Agentic AI Pipeline for Process Automation',
+      subtitle: '2025 · AI · Spring AI, Ollama, Groq, Llama 3.3-70B, OCR',
+      badge: 'AI Project',
+      keywords: ['agentic', 'ai pipeline', 'process automation', 'spring ai', 'ollama', 'groq', 'llama', 'ocr', 'vision'],
+      summary: 'Model-agnostic agentic workflow chaining OCR, local LLM extraction, and high-speed cloud LLM routing for automated document processing.',
+      metrics: [
+        { val: 'Vision OCR', lbl: 'Stage 1 Ingest' },
+        { val: 'Ollama', lbl: 'Stage 2 Extract' },
+        { val: 'Groq 70B', lbl: 'Stage 3 Route' }
+      ],
+      implementations: [
+        'Orchestrated multi-step AI agents using Spring AI without vendor lock-in.',
+        'Combined Google Cloud Vision OCR with local Ollama extraction and Groq (Llama 3.3-70B) decision routing.'
+      ],
+      related: ['Ollama', 'Spring Boot', 'Java'],
+      section: '#work'
+    },
+    {
+      id: 'proj-audit',
+      category: 'Projects & Systems',
+      icon: '04',
+      title: 'Event Change-Tracking & Audit System',
+      subtitle: '2026 · Platform · Java, Spring Boot, PostgreSQL, Email',
+      badge: 'Project',
+      keywords: ['audit', 'change tracking', 'diff', 'multi-tenant', 'email', 'notifications', 'kayana'],
+      summary: 'Field-level change-tracking and audit-logging engine with visual diff highlighting across a multi-tenant event platform.',
+      metrics: [
+        { val: 'Field-Level', lbl: 'Diff Detection' },
+        { val: 'Multi-Tenant', lbl: 'Platform Scope' }
+      ],
+      implementations: [
+        'Intercepts entity updates across event workflows to compute exact field-level before/after diffs.',
+        'Triggers automated update-notification emails with visual diff highlighting for organizers and customers.'
+      ],
+      related: ['Spring Boot', 'Java', 'Kayana Technologies'],
+      section: '#work'
+    },
+    {
+      id: 'proj-signals',
+      category: 'Projects & Systems',
+      icon: '05',
+      title: 'Signals — Algorithmic Trading Bot',
+      subtitle: '2026 · Quant Fintech · Java, WebFlux, Kafka, ta4j, Angel One',
+      badge: 'Project',
+      keywords: ['signals', 'trading', 'algorithmic', 'bot', 'angel one', 'ta4j', 'webflux', 'kafka', 'backtesting'],
+      summary: 'Reactive algorithmic trading system connected to Angel One SmartAPI supporting live market-data ingestion, ta4j backtesting, paper trading, and live execution.',
+      metrics: [
+        { val: 'WebFlux', lbl: 'Reactive Core' },
+        { val: 'ta4j', lbl: 'Indicator Engine' },
+        { val: '4 Phases', lbl: 'Ingest → Live' }
+      ],
+      implementations: [
+        'Streams real-time market ticks over WebSockets into Kafka and non-blocking Spring WebFlux pipelines.',
+        'Evaluates technical indicators with ta4j and isolates paper trading from live brokerage execution.'
+      ],
+      related: ['Spring WebFlux', 'Kafka', 'Java', 'Fintech'],
+      section: '#work'
+    },
+    {
+      id: 'proj-threads',
+      category: 'Projects & Systems',
+      icon: '06',
+      title: 'Threads — Concurrent Batch Processing Engine',
+      subtitle: 'Personal · Concurrency · Java, ExecutorService, CompletableFuture',
+      badge: 'Project',
+      keywords: ['threads', 'batch', 'concurrency', 'executorservice', 'completablefuture', 'backpressure', 'blockingqueue', 'retry'],
+      summary: 'Fault-isolated bulk-record processor built to replace a slow sequential import job using bounded worker pools and async pipelines.',
+      metrics: [
+        { val: 'Bounded', lbl: 'Worker Pool' },
+        { val: 'Per-Row', lbl: 'Fault Isolation' }
+      ],
+      implementations: [
+        'Built on ExecutorService and CompletableFuture with blocking-queue backpressure.',
+        'Isolates per-record retries and failures so a single malformed row never stalls the entire batch.'
+      ],
+      related: ['Java', 'Spring Boot'],
+      section: '#work'
+    },
+    {
+      id: 'exp-kayana',
+      category: 'Experience & Impact',
+      icon: 'KY',
+      title: 'Kayana Technologies — Backend Developer',
+      subtitle: 'Mar 2026 — Present · Mumbai, India',
+      badge: 'Current Role',
+      keywords: ['kayana', 'experience', 'work', 'current', 'backend developer', '30+ microservices', 'stripe', 'ryft', 'urbanpiper', 'stream'],
+      summary: 'Owns end-to-end backend delivery across 30+ microservices on Kayana’s core multi-tenant event and commerce platform.',
+      metrics: [
+        { val: '30+', lbl: 'Microservices' },
+        { val: '4', lbl: 'Major Integrations' }
+      ],
+      implementations: [
+        'Designed and shipped the Seasons recurring-ticket system (recurrence modeling, QR verification, PIN Hide Ticket privacy).',
+        'Built the platform-wide Event Change-Tracking & Audit system with visual diff emails.',
+        'Integrated Ryft recurring subscriptions, Stripe card tokenization, STREAM delivery, and UrbanPiper aggregator.'
+      ],
+      related: ['Seasons', 'Audit', 'Spring Boot', 'Spring WebFlux', 'Kafka'],
+      section: '#experience'
+    },
+    {
+      id: 'exp-hffc',
+      category: 'Experience & Impact',
+      icon: 'HF',
+      title: 'Home First Finance — Software Developer',
+      subtitle: 'Oct 2022 — Mar 2026 · Team Lead (4) · Fintech',
+      badge: '3.5 Years',
+      keywords: ['home first', 'hffc', 'experience', 'fintech', 'team lead', 'leadership', 'vapt', '65%', '35%', '40%', 'reconciliation'],
+      summary: 'Full-stack & backend engineer who designed core housing-finance systems, led a team of 4 engineers, and drove major performance and security milestones.',
+      metrics: [
+        { val: '65%', lbl: 'Perf. Gain' },
+        { val: '35%', lbl: 'Faster Loads' },
+        { val: '4', lbl: 'Engineers Led' }
+      ],
+      implementations: [
+        'Delivered the Collection Management System, Legal & Technical Verification Portal, eKYC, Loan Onboarding, and Banking Reconciliation system.',
+        'Improved production performance by ~65% via Redis caching and MySQL optimization; sped up page loads by 35% with Angular 17+ & SSR.',
+        'Led a team of 4 developers and spearheaded the company-wide VAPT security exercise.'
+      ],
+      related: ['Collection', 'Redis', 'Angular', 'Cloud & DevOps'],
+      section: '#experience'
+    },
+    {
+      id: 'act-contact',
+      category: 'Quick Actions',
+      icon: '✉',
+      title: 'Copy Email & Contact Kundan',
+      subtitle: 'sk.kundan.05@gmail.com · Open to Senior Roles',
+      badge: 'Action',
+      keywords: ['contact', 'email', 'hire', 'resume', 'linkedin', 'github', 'medium', 'mumbai'],
+      summary: 'Open to senior backend, full-stack, and AI engineering roles in 2026. Click the action button below to copy sk.kundan.05@gmail.com or jump to the contact section.',
+      metrics: [
+        { val: '2026', lbl: 'Open to Roles' },
+        { val: 'IST', lbl: 'Mumbai, India' }
+      ],
+      implementations: [
+        'Direct Email: <strong>sk.kundan.05@gmail.com</strong>',
+        'GitHub: <strong>github.com/kundanscode</strong> · Medium: <strong>@kundanscode</strong> · LinkedIn: <strong>in/kundans</strong>'
+      ],
+      related: ['Java', 'Spring Boot', 'Ollama'],
+      section: '#contact',
+      actionType: 'copyEmail'
+    },
+    {
+      id: 'act-theme',
+      category: 'Quick Actions',
+      icon: '◐',
+      title: 'Toggle Light / Obsidian Dark Theme',
+      subtitle: 'Switch portfolio color palette',
+      badge: 'Theme',
+      keywords: ['theme', 'dark', 'light', 'mode', 'color', 'appearance'],
+      summary: 'Switch between Warm Editorial Parchment (Light) and Obsidian Carbon (Dark Mode) with persistent local storage.',
+      metrics: [],
+      implementations: [
+        'Adapts contrast, ambient radial glows, and Spotlight glassmorphism automatically.'
+      ],
+      related: [],
+      section: '#',
+      actionType: 'toggleTheme'
+    }
+  ];
+
+  let filteredResults = [...KNOWLEDGE_GRAPH];
+  let selectedIndex = 0;
+
+  // Intelligent Multi-Field Semantic Scoring
+  function searchKnowledge(rawQuery) {
+    const q = (rawQuery || '').trim().toLowerCase();
+    if (!q) return [...KNOWLEDGE_GRAPH];
+
+    const terms = q.split(/\s+/).filter(Boolean);
+    const scored = [];
+
+    KNOWLEDGE_GRAPH.forEach(item => {
+      let score = 0;
+      const titleL = item.title.toLowerCase();
+      const subL = item.subtitle.toLowerCase();
+      const sumL = item.summary.toLowerCase();
+      const implL = item.implementations.join(' ').toLowerCase();
+      const kwList = item.keywords;
+
+      terms.forEach(t => {
+        if (titleL === t || item.id === t) score += 120;
+        else if (titleL.startsWith(t)) score += 85;
+        else if (titleL.includes(t)) score += 65;
+
+        if (kwList.some(k => k === t)) score += 80;
+        else if (kwList.some(k => k.includes(t) || t.includes(k))) score += 45;
+
+        if (subL.includes(t)) score += 35;
+        if (sumL.includes(t)) score += 25;
+        if (implL.includes(t)) score += 20;
+        if (item.related.some(r => r.toLowerCase().includes(t))) score += 30;
+      });
+
+      if (score > 0) scored.push({ item, score });
+    });
+
+    scored.sort((a, b) => b.score - a.score);
+    return scored.map(s => s.item);
+  }
+
+  function renderList() {
+    countBadge.textContent = `${filteredResults.length} ${filteredResults.length === 1 ? 'match' : 'matches'}`;
+
+    if (!filteredResults.length) {
+      listPane.innerHTML = `<div style="padding:1.2rem; color:var(--muted); font-size:0.84rem; text-align:center;">No exact match found. Try <strong>Java</strong>, <strong>Spring Boot</strong>, <strong>Ollama</strong>, <strong>Kafka</strong>, or <strong>Redis</strong>.</div>`;
+      detailPane.innerHTML = `<div style="padding:2rem; color:var(--muted);">Type any technology, project, or metric above to inspect Kundan's architecture and achievements.</div>`;
+      return;
+    }
+
+    // Group while preserving score order within groups or flat if searching
+    const isSearching = cmdInput.value.trim().length > 0;
+    let html = '';
+
+    if (isSearching) {
+      html += `<div class="sp-group-title">Top Intelligent Matches</div>`;
+      filteredResults.forEach((it, idx) => {
+        html += renderItemRow(it, idx);
+      });
+    } else {
+      const groups = {};
+      filteredResults.forEach((it, idx) => {
+        if (!groups[it.category]) groups[it.category] = [];
+        groups[it.category].push({ it, idx });
+      });
+      Object.keys(groups).forEach(gName => {
+        html += `<div class="sp-group-title">${gName}</div>`;
+        groups[gName].forEach(({ it, idx }) => {
+          html += renderItemRow(it, idx);
+        });
+      });
+    }
+
+    listPane.innerHTML = html;
+
+    listPane.querySelectorAll('.sp-item').forEach(el => {
+      const idx = Number(el.dataset.idx);
+      el.addEventListener('mouseenter', () => {
+        selectedIndex = idx;
+        updateSelectionHighlight();
+        renderDetail(filteredResults[selectedIndex]);
+      });
+      el.addEventListener('click', () => {
+        selectedIndex = idx;
+        executeItemAction(filteredResults[selectedIndex]);
+      });
+    });
+
+    renderDetail(filteredResults[selectedIndex]);
+  }
+
+  function renderItemRow(it, idx) {
+    const sel = idx === selectedIndex ? 'selected' : '';
+    return `
+      <div class="sp-item ${sel}" role="option" aria-selected="${idx === selectedIndex}" data-idx="${idx}">
+        <div class="sp-item-left">
+          <div class="sp-item-icon">${it.icon}</div>
+          <div class="sp-item-titles">
+            <div class="sp-item-title">${it.title}</div>
+            <div class="sp-item-sub">${it.subtitle}</div>
+          </div>
+        </div>
+        <span class="sp-item-badge">${it.badge}</span>
+      </div>
+    `;
+  }
+
+  function updateSelectionHighlight() {
+    listPane.querySelectorAll('.sp-item').forEach(el => {
+      const active = Number(el.dataset.idx) === selectedIndex;
+      el.classList.toggle('selected', active);
+      el.setAttribute('aria-selected', String(active));
+      if (active) el.scrollIntoView({ block: 'nearest' });
+    });
+  }
+
+  function renderDetail(item) {
+    if (!item) return;
+
+    const metricsHtml = item.metrics && item.metrics.length
+      ? `<div class="sp-metrics-grid">
+          ${item.metrics.map(m => `
+            <div class="sp-metric-box">
+              <div class="sp-metric-val">${m.val}</div>
+              <div class="sp-metric-lbl">${m.lbl}</div>
+            </div>
+          `).join('')}
+        </div>`
+      : '';
+
+    const implHtml = item.implementations && item.implementations.length
+      ? `<div>
+          <div class="sp-sec-label">What I Worked On, Implemented & Achieved</div>
+          <ul class="sp-bullets">
+            ${item.implementations.map(b => `<li>${b}</li>`).join('')}
+          </ul>
+        </div>`
+      : '';
+
+    const relHtml = item.related && item.related.length
+      ? `<div>
+          <div class="sp-sec-label">Connected Technologies & Systems (Click to Pivot)</div>
+          <div class="sp-rel-wrap">
+            ${item.related.map(r => `<button type="button" class="sp-rel-pill" data-pivot="${r}">${r} →</button>`).join('')}
+          </div>
+        </div>`
+      : '';
+
+    const btnLabel = item.actionType === 'copyEmail'
+      ? 'Copy sk.kundan.05@gmail.com ↵'
+      : item.actionType === 'toggleTheme'
+      ? 'Toggle Light / Dark Theme ↵'
+      : `Jump to ${item.section} on page ↵`;
+
+    detailPane.innerHTML = `
+      <div class="sp-detail-head">
+        <div class="sp-detail-kicker">
+          <span class="sp-detail-type">${item.category}</span>
+          <span class="sp-detail-meta">${item.badge}</span>
+        </div>
+        <h3 class="sp-detail-title">${item.title}</h3>
+        <p class="sp-detail-summary">${item.summary}</p>
+      </div>
+      ${metricsHtml}
+      ${implHtml}
+      ${relHtml}
+      <div class="sp-detail-actions">
+        <span style="font-family:var(--mono); font-size:0.68rem; color:var(--muted);">${item.subtitle}</span>
+        <button type="button" class="sp-jump-btn" id="spActionBtn">${btnLabel}</button>
+      </div>
+    `;
+
+    detailPane.querySelectorAll('.sp-rel-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        const q = pill.dataset.pivot;
+        setQuery(q);
+      });
+    });
+
+    const actionBtn = document.getElementById('spActionBtn');
+    if (actionBtn) {
+      actionBtn.addEventListener('click', () => executeItemAction(item));
+    }
+  }
+
+  function executeItemAction(item) {
+    if (!item) return;
+    if (item.actionType === 'copyEmail') {
+      copyEmail();
+      const btn = document.getElementById('spActionBtn');
+      if (btn) btn.textContent = 'Copied sk.kundan.05@gmail.com! ✓';
+      return;
+    }
+    if (item.actionType === 'toggleTheme') {
+      themeBtn.click();
+      return;
+    }
+    toggleCmd(false);
+    if (item.section && item.section.startsWith('#') && item.section.length > 1) {
+      document.querySelector(item.section)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  function setQuery(q) {
+    cmdInput.value = q;
+    chipBtns.forEach(c => c.classList.toggle('active', c.dataset.query.toLowerCase() === q.toLowerCase()));
+    filteredResults = searchKnowledge(q);
+    selectedIndex = 0;
+    renderList();
+    cmdInput.focus();
+  }
+
+  function toggleCmd(open, initialQuery = '') {
     cmdModal.classList.toggle('open', open);
     cmdModal.setAttribute('aria-hidden', String(!open));
     if (open) {
-      cmdInput.value = '';
-      cmdItems.forEach(i => i.style.display = 'flex');
-      setTimeout(() => cmdInput.focus(), 50);
+      setQuery(initialQuery);
+      setTimeout(() => cmdInput.focus(), 40);
     }
-  };
+  }
 
   cmdBtn.addEventListener('click', () => toggleCmd(true));
+  if (heroAskBtn) heroAskBtn.addEventListener('click', () => toggleCmd(true, 'Java'));
+  closeBtn.addEventListener('click', () => toggleCmd(false));
   cmdModal.addEventListener('click', e => { if (e.target === cmdModal) toggleCmd(false); });
+
+  // Clicking any Bento skill tag opens Spotlight directly to that technology
+  document.querySelectorAll('.bento-tag[data-search]').forEach(tag => {
+    tag.addEventListener('click', () => {
+      toggleCmd(true, tag.dataset.search);
+    });
+  });
+
+  chipBtns.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const q = chip.dataset.query;
+      setQuery(cmdInput.value.toLowerCase() === q.toLowerCase() ? '' : q);
+    });
+  });
+
+  cmdInput.addEventListener('input', () => {
+    const q = cmdInput.value;
+    chipBtns.forEach(c => c.classList.toggle('active', c.dataset.query.toLowerCase() === q.trim().toLowerCase()));
+    filteredResults = searchKnowledge(q);
+    selectedIndex = 0;
+    renderList();
+  });
+
   window.addEventListener('keydown', e => {
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
       e.preventDefault();
       toggleCmd(!cmdModal.classList.contains('open'));
-    } else if (e.key === 'Escape') {
-      toggleCmd(false);
+      return;
     }
-  });
+    if (!cmdModal.classList.contains('open')) return;
 
-  cmdInput.addEventListener('input', () => {
-    const q = cmdInput.value.toLowerCase();
-    cmdItems.forEach(item => {
-      item.style.display = item.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
-    });
-  });
-
-  cmdItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const act = item.dataset.action;
+    if (e.key === 'Escape') {
+      e.preventDefault();
       toggleCmd(false);
-      if (act.startsWith('#')) {
-        document.querySelector(act)?.scrollIntoView({ behavior: 'smooth' });
-      } else if (act === 'theme') {
-        themeBtn.click();
-      } else if (act === 'copy') {
-        copyEmail();
-      } else if (act === 'github') {
-        window.open('https://github.com/kundanscode', '_blank');
-      } else if (act === 'linkedin') {
-        window.open('https://linkedin.com/in/kundans', '_blank');
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (filteredResults.length) {
+        selectedIndex = (selectedIndex + 1) % filteredResults.length;
+        updateSelectionHighlight();
+        renderDetail(filteredResults[selectedIndex]);
       }
-    });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (filteredResults.length) {
+        selectedIndex = (selectedIndex - 1 + filteredResults.length) % filteredResults.length;
+        updateSelectionHighlight();
+        renderDetail(filteredResults[selectedIndex]);
+      }
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (filteredResults[selectedIndex]) {
+        executeItemAction(filteredResults[selectedIndex]);
+      }
+    }
   });
 })();
 
@@ -2796,7 +3892,7 @@ document.querySelectorAll('.bento-card, .project').forEach(card => {
   update();
 })();
 
-// ---------- Live Medium Posts with Graceful Fallback ----------
+// ---------- Live Medium Posts ----------
 (function () {
   const grid = document.getElementById('blogGrid');
   if (!grid) return;
