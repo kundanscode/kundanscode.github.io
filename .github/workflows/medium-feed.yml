@@ -40,10 +40,12 @@ jobs:
               if text.startswith(title):
                   text = text[len(title):].strip()
               cats = [c.text for c in item.findall("category") if c.text]
+              image = next((html.unescape(u) for u in re.findall(r'<img[^>]+src="([^"]+)"', body) if "/_/stat" not in u), "")
               posts.append({
                   "title": title,
                   "link": link,
                   "date": parsedate_to_datetime(item.findtext("pubDate")).date().isoformat(),
+                  "image": image,
                   "tag": cats[0].replace("-", " ").title() if cats else "Medium",
                   "excerpt": (text[:150].rsplit(" ", 1)[0] + "…") if len(text) > 150 else text,
                   "minutes": max(1, round(len(strip(body).split()) / 200)),
