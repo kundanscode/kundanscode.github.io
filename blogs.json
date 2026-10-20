@@ -1,0 +1,50 @@
+[
+  {
+    "title": "How Spring AI is reshaping the way we develop Java Applications",
+    "link": "https://medium.com/@kundanscode/how-ai-is-reshaping-the-way-we-develop-java-applications-5fe52db72cb7",
+    "date": "2026-10-18",
+    "tag": "Software Development",
+    "excerpt": "A deep dive with Spring AI and Enterprise Agentic Architectures By an Enterprise Java Developer transitioning into AI Engineering For three decades,…",
+    "minutes": 21
+  },
+  {
+    "title": "How to build AI systems that remember the right things at the right time",
+    "link": "https://medium.com/@kundanscode/how-to-build-ai-systems-that-remember-the-right-things-at-the-right-time-ef0154e1b1e7",
+    "date": "2026-10-17",
+    "tag": "Ai Agent",
+    "excerpt": "Core idea: A language model can use the context supplied to it, but the application must decide what to preserve, where to store it, when to retrieve…",
+    "minutes": 15
+  },
+  {
+    "title": "I Stopped Dumping My Whole Codebase Into Claude. Here’s the Two-Folder Trick That Fixed It.",
+    "link": "https://medium.com/@kundanscode/i-stopped-dumping-my-whole-codebase-into-claude-heres-the-two-folder-trick-that-fixed-it-1f0eecfbba7a",
+    "date": "2026-08-20",
+    "tag": "Claude Code",
+    "excerpt": "A simple system that makes AI assistants read less — and remember more. If you’ve used Claude, ChatGPT, or any AI coding assistant for more than a…",
+    "minutes": 9
+  },
+  {
+    "title": "The Claude Code Commands I Wish I’d Known From Day One",
+    "link": "https://medium.com/@kundanscode/the-claude-code-commands-i-wish-id-known-from-day-one-0cd758cf914a",
+    "date": "2026-08-18",
+    "tag": "Software Development",
+    "excerpt": "Most people use maybe two slash commands. Here’s what the other ones actually do — and when they’re worth reaching for. For the first stretch of…",
+    "minutes": 6
+  },
+  {
+    "title": "Building an AI-Powered Medical Prescription Analyzer and Doctor Assistant with Spring Boot & Spring…",
+    "link": "https://medium.com/@kundanscode/building-an-ai-powered-medical-prescription-analyzer-and-doctor-assistant-with-spring-boot-spring-ec845d66d8bb",
+    "date": "2026-03-21",
+    "tag": "Ollama",
+    "excerpt": "Building an AI-Powered Medical Prescription Analyzer and Doctor Assistant with Spring Boot & Spring AI : Phase — 1 How I combined Google Vision OCR,…",
+    "minutes": 2
+  },
+  {
+    "title": "How final, finally, and Try-with-Resources Work in Java. There Thread-Safety and Object reference.",
+    "link": "https://medium.com/@kundanscode/how-final-finally-and-try-with-resources-work-in-java-there-thread-safety-and-object-reference-81e9146ce9f2",
+    "date": "2026-01-19",
+    "tag": "Java",
+    "excerpt": "How Final, Finally and Try-with-Resources Work in Java. There Thread-Safety and Object reference. The Keyword: final Definition: In Java, final…",
+    "minutes": 6
+  }
+]
