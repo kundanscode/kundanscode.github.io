@@ -1087,6 +1087,9 @@ padding: 1.5rem; display: flex; flex-direction: column; transition: all 0.3s eas
 text-decoration: none; color: inherit;
 }
 .blog-card:hover { transform: translateY(-4px); border-color: var(--ink); }
+.blog-card { overflow: hidden; }
+.blog-thumb { display: block; width: calc(100% + 3rem); margin: -1.5rem -1.5rem 1.2rem; aspect-ratio: 16 / 9; object-fit: cover; background: var(--line); transition: transform 0.5s ease; }
+.blog-card:hover .blog-thumb { transform: scale(1.03); }
 .blog-tag {
 font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
 margin-bottom: 0.9rem;
@@ -2008,6 +2011,12 @@ a.className = 'blog-card reveal in';
 a.href = p.link; a.target = '_blank'; a.rel = 'noopener';
 const mk = (tag, cls, text) => { const e = document.createElement(tag); e.className = cls; e.textContent = text; return e; };
 const d = new Date(p.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+if (p.image) {
+const img = document.createElement('img');
+img.className = 'blog-thumb'; img.src = p.image; img.alt = ''; img.loading = 'lazy'; img.referrerPolicy = 'no-referrer';
+img.onerror = () => img.remove();
+a.appendChild(img);
+}
 a.append(mk('div', 'blog-tag', p.tag || 'Medium'), mk('h3', 'blog-title', p.title),
 mk('p', 'blog-excerpt', p.excerpt || ''), mk('div', 'blog-meta', 'Medium · ' + d + ' · ' + (p.minutes || 1) + ' min read'));
 grid.appendChild(a);
